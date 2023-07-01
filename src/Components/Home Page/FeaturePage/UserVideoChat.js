@@ -36,7 +36,7 @@ const UserVideoChat = () => {
   }, [simplePeer]);
 console.log(connectionStatus);
   const sendOrAcceptInvitation = (isInitiator, offer) => {
-    navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+    navigator.mediaDevices.getUserMedia({ video: true, audio: true })
       .then((mediaStream) => {
         const video = videoSelf.current;
         video.srcObject = mediaStream;
@@ -65,23 +65,7 @@ console.log(connectionStatus);
       })
      
   };
-  const stopVideo = () => {
-    if (simplePeer) {
-      simplePeer.destroy();
-      setSimplePeer(null);
-    }
-    if (mediaStream) {
-      mediaStream.getTracks().forEach((track) => {
-        track.stop();
-      });
-      setMediaStream(null);
-    }
-    setConnectionStatus(null);
-    videoSelf.current.srcObject = null;
-  };
-
   
-
   return (
   
     <>
